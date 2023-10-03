@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed</title>
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <script src="../dist/popper.min.js"></script>
+    <script src="../dist/bootstrap.min.js"></script>
+    <script src="./feed.js" defer></script>
+    <script src="https://kit.fontawesome.com/86fb0fb587.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark-subtle">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">PokeForum</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="../profile/index.html">Profile</a></li>
+                <li><a class="dropdown-item" href="./index.html">Feed</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="../index.html">Quick Logout</a></li>
+            </ul>
+          </li>
+          
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2 border-black" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+<div class="container d-flex flex-column min-vh-100">
+    <div class="row">
+         <div class="d-flex justify-content-between">
+        <button type="button" class="newpost  btn btn-success w-25 mx-5 my-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Create New Post <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </button>
+        <button class="sortbuttons btn btn-outline-success">Newest</button>
+        <button class="sortbuttons btn btn-outline-success">Popularity</button>
+        <button class="sortbuttons btn btn-outline-success">Trending</button>
+        <label class="searchlabel" for="search">Search posts:</label>
+        <input type="text" class="searchbar border-success form-control" id="search">
+      </div> 
+
+  
+        
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">New post</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-outline mb-4">
+                            <label for="title" class="form-label">Title:
+                            <input type="text" class="form-control" placeholder="Enter post title" name="title" required>
+                            
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label for="title" class="form-label">Text:
+                                <textarea class="form-control" rows="5" cols="30" id="title">
+                                </textarea>
+                            
+                        </div>
+                    
+                        <div>
+                        <div class="mb-4 d-flex flex-column">
+                            <label class="form-label" for="modalimg">Upload image:</label>
+                            <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+                            alt="example placeholder" style="width: 300px;" id="modalimg" />
+                        </div>
+                        <div>
+                        <div class="btn btn-primary btn-rounded">
+                         <label class="form-label text-white m-1" for="customFile1">Choose file</label>
+                         <input type="file" class="form-control d-none" id="customFile1" />
+        </div>
+    </div>
+</div>
+
+                    </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+    </div>
+  </div>
+  
+  </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-5 col-10 mx-auto feedcard my-2 d-flex justify-content-center align-items-center">
+                <h2 class="user">Published by coolGuy79</h2>
+                <p class="fw-lighter">1 min ago</p>
+                <img class="card-img-top object-fit-fill" src="../images/CharizardCard.png" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Charizard</h5>
+                  <p class="card-text">Charizard, a majestic Fire/Flying-type Pokémon, is the final evolution of Charmander. With its flaming breath and formidable wings, Charizard can unleash devastating fire attacks from the sky. It is known for its fierce and independent nature, making it a symbol of strength and courage among trainers and fans alike.</p>
+                  <a href="#" class="btn btn-primary">To profile</a>
+                  <div class="d-flex gap-2 my-2">
+                    <button class="like btn btn-primary"><i class="fa-regular fa-heart"></i> Like</button>
+                    <button class="btn btn-primary"><i class="fa-regular fa-comment"></i> Comment</button>
+                    <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>
+                  </div>
+              </div>
+        </div>
+        <div class="col-lg-5 col-10  mx-auto feedcard my-2 d-flex justify-content-center align-items-center">
+                <h2 class="user">Published by pokemonlover34</h2>
+                <p class="fw-lighter">2 min ago</p>
+                <img class="card-img object-fit-fill" src="../images/MewtwoCard.png" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">MewTwo</h5>
+                  <p class="card-text">Mewtwo is a legendary Psychic-type Pokémon, created through genetic manipulation. With an imposing presence and unmatched psychic abilities, it stands as one of the most formidable beings in the Pokémon world. Mewtwo's incredible intellect and raw power make it a sought-after asset in battles, making it an iconic and enigmatic character.</p>
+                  <a href="#" class="btn btn-primary">To profile:</a>
+                  <div class="d-flex gap-2 my-2">
+                    <button class="like btn btn-primary"><i class="fa-regular fa-heart"></i> Like</button>
+                    <button class="btn btn-primary"><i class="fa-regular fa-comment"></i> Comment</button>
+                    <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>
+                  </div>
+              </div>
+        </div>   
+    </div> 
+    <div class="row">
+        <div class="col-lg-5 col-10 mx-auto feedcard my-2 d-flex justify-content-center align-items-center">
+                <h2 class="user">Published by Caplix</h2>
+                <p class="fw-lighter">3 min ago</p>
+                <img class="card-img-top object-fit-fill" src="../images/ScizorCard.png" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Scizor</h5>
+                  <p class="card-text">Scizor, a dual-type Bug/Steel Pokémon, evolves from Scyther when traded holding a Metal Coat. Known for its sleek and swift appearance, Scizor boasts razor-sharp claws that it wields with precision in battle. Its combination of speed and cutting-edge attacks makes it a formidable opponent, earning it a place among Pokémon trainers' top choices.</p>
+                  <a href="#" class="btn btn-primary">To profile:</a>
+                  <div class="d-flex gap-2 my-2">
+                    <button class="like btn btn-primary"><i class="fa-regular fa-heart"></i> Like</button>
+                    <button class="btn btn-primary"><i class="fa-regular fa-comment"></i> Comment</button>
+                    <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>
+                  </div>
+              </div>
+        </div>
+        <div class="col-lg-5 col-10 mx-auto feedcard my-2 d-flex justify-content-center align-items-center">
+          <h2 class="user">Published by RyanGozling</h2>
+          <p class="fw-lighter">4 min ago</p>
+                <img class="card-img-top object-fit-fill" src="../images/SteelixCard.png" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Steelix</h5>
+                  <p class="card-text">Steelix is a formidable Steel/Ground-type Pokémon, evolved from Onix when traded while holding a Metal Coat. Its colossal, serpentine body is forged from solid steel, granting it impressive defensive capabilities. Steelix can burrow through the earth with ease, creating tunnels as it travels. Its intimidating presence and ironclad defenses make it a formidable opponent in battles.</p>
+                  <a href="#" class="btn btn-primary">To profile:</a>
+                  <div class="d-flex gap-2 my-2">
+                    <button class="like btn btn-primary"><i class="fa-regular fa-heart"></i> Like</button>
+                    <button class="btn btn-primary"><i class="fa-regular fa-comment"></i> Comment</button>
+                    <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>
+                  </div>
+              </div>
+        </div>
+        
+    </div>
+    </div>
+
+    
+    
+
+</div>
+</body>
+</html>
