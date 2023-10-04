@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const accessToken = await loginUser(`${API_BASE_URL}/api/v1/social/auth/login`, userLogin);
+            const accessToken = await loginUser(`${API_BASE_URL}/api/v1/social/auth/login`, userLogin);git
             localStorage.setItem('accessToken', accessToken.accessToken);
 
             window.location.href = "../profile/index.html";
