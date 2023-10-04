@@ -5,14 +5,14 @@ const invalid = document.querySelector("#invalid");
 const regexTester = (input, rule) => {
     return rule.test(input);
 };
-console.log(regexTester(emailInput.value, email));
-if (regexTester(emailInput.value, email) === true){
+
+/*if (regexTester(emailInput.value, email) === true){
     invalid.style.display = "none";
     valid.style.display = "block";
 }else {
     invalid.style.display = "block";
     valid.style.display = "none";
-}
+}*/
 addEventListener("DOMContentLoaded", (event) => {
     const password = document.getElementById("password-input");
     const passwordAlert = document.getElementById("password-alert");
