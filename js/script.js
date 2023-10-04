@@ -108,4 +108,7 @@ addEventListener("DOMContentLoaded", (event) => {
 });
 
 
+/* GET, POST, PATCH, DELETE REQUESTS */
+
+
 
