@@ -21,11 +21,20 @@ async function getPosts() {
 	});
 	const data = await res.json();
 	console.log(data);
+  console.log(minutesAgo("23-10-04T12:53:52.748Z"));
 
   for(let i = 0; i < 20; i++){
+    const oldTime = data[i].created;
+    const newTime = minutesAgo(oldTime[i])
+    
+    
+    
+    
+    
     const postDiv = document.createElement("div");
+    postDiv.classList.add("col-lg-5", "col-10", "mx-auto", "feedcard", "my-2", "d-flex", "justify-content-center", "align-items-center")
     postDiv.innerHTML += `
-    <p class="fw-lighter">${data[i].created}</p>
+    <p class="fw-lighter">${newTime}</p>
     <img class="card-img-top object-fit-fill" src="${data[i].media}">
     <div class="card-body">
       <h5 class="card-title">${data[i].title}</h5>
@@ -36,9 +45,30 @@ async function getPosts() {
         <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>
       </div>`;
   row.appendChild(postDiv);
+  
   }
 }
 getPosts()
+console.log(new Date("23-10-04T12:53:52.748"));
+
+function minutesAgo(timestampString) {
+  // Parse the timestamp string into a Date object
+  const postDate = new Date(timestampString);
+
+  // Get the current date and time
+  const currentDate = new Date();
+  console.log()
+
+  // Calculate the time difference in milliseconds
+  const timeDifferenceMillis = currentDate - postDate;
+  
+
+  // Calculate the time difference in minutes
+  const minutesDifference = Math.floor(timeDifferenceMillis / (1000 * 60));
+  
+
+  return minutesDifference;
+}
 
 
 
