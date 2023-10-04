@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+
     <link rel="stylesheet" href="./dist/css/main.css">
     <script src="./node_modules/@popperjs/core/dist/umd/popper.js"></script>
-    <script src="./node_modules/bootstrap/dist/css/bootstrap.css"></script>
+    <script src="./node_modules/bootstrap/dist/css/bootstrap.min.css"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+
+    
+   
+    
+    
+
     <script src="./js/script.js" defer></script>
-    <script src="https://kit.fontawesome.com/86fb0fb587.js" crossorigin="anonymous"></script>
-</head>
-<body>
+    <script src="./js/components/Login.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/86fb0fb587.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark-subtle">
+
         <div class="container-fluid">
           <a class="navbar-brand" href="./index.html">Twoddlr</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,32 +72,10 @@
                 <input id="password-input" type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" minlength="8" required>
                 <div class="invalid-feedback">Invalid</div>
                 
+     
             </div>
-            <div
-            class="alert px-4 py-3 mb-0 d-none"
-            role="alert"
-            data-mdb-color="warning"
-            id="password-alert"
-            >
-            <ul class="list-unstyled mb-0">
-              <li class="requirements leng">
-                <i class="fas fa-check text-success me-2"></i>
-                <i class="fas fa-times text-danger me-3"></i>
-                Your password must have at least 8 chars</li>
-              <li class="requirements big-letter">
-                <i class="fas fa-check text-success me-2"></i>
-                <i class="fas fa-times text-danger me-3"></i>
-                Your password must have at least 1 big letter.</li>
-              <li class="requirements num">
-                <i class="fas fa-check text-success me-2"></i>
-                <i class="fas fa-times text-danger me-3"></i>
-                Your password must have at least 1 number.</li>
-              <li class="requirements special-char">
-                <i class="fas fa-check text-success me-2"></i>
-                <i class="fas fa-times text-danger me-3"></i>
-                Your password must have at least 1 special char.</li>
-            </ul>
           </div>
+
           
             <!-- 2 column grid layout for inline styling -->
             <div class="row mb-4">
@@ -126,3 +121,4 @@
     
 </body>
 </html>
+
