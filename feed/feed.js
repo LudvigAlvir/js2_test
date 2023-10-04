@@ -21,23 +21,24 @@ async function getPosts() {
 	});
 	const data = await res.json();
 	console.log(data);
+
+  for(let i = 0; i < 20; i++){
+    const postDiv = document.createElement("div");
+    postDiv.innerHTML += `
+    <p class="fw-lighter">${data[i].created}</p>
+    <img class="card-img-top object-fit-fill" src="${data[i].media}">
+    <div class="card-body">
+      <h5 class="card-title">${data[i].title}</h5>
+      <p class="card-text">${data[i].body}</p>
+      <div class="d-flex gap-2 my-2">
+        <button class="like btn btn-primary"><i class="fa-regular fa-heart"></i> Like</button>
+        <button class="btn btn-primary"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>
+      </div>`;
+  row.appendChild(postDiv);
+  }
 }
 getPosts()
 
-for(let i = 0; i < 20; i++){
-  const postDiv = document.createElement("div");
-  postDiv.innerHTML += `<h2 class="user">Published by coolGuy79</h2>
-  <p class="fw-lighter">1 min ago</p>
-  <img class="card-img-top object-fit-fill" src="../images/CharizardCard.png" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Charizard</h5>
-    <p class="card-text">Charizard, a majestic Fire/Flying-type Pokémon, is the final evolution of Charmander. With its flaming breath and formidable wings, Charizard can unleash devastating fire attacks from the sky. It is known for its fierce and independent nature, making it a symbol of strength and courage among trainers and fans alike.</p>
-    <a href="#" class="btn btn-primary">To profile</a>
-    <div class="d-flex gap-2 my-2">
-      <button class="like btn btn-primary"><i class="fa-regular fa-heart"></i> Like</button>
-      <button class="btn btn-primary"><i class="fa-regular fa-comment"></i> Comment</button>
-      <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>
-    </div>`;
-row.appendChild(postDiv);
-}
+
 
