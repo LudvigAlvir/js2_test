@@ -1,10 +1,10 @@
 // login.js
 const API_BASE_URL = "https://api.noroff.dev"
-const form = document.getElementById("form");
+const form = document.querySelector("#login");
 const usernameInput = document.getElementById("uname");
 const passwordInput = document.getElementById("password-input");
 
-document.addEventListener('DOMContentLoaded', () => {
+
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -18,8 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const accessToken = await loginUser(`${API_BASE_URL}/api/v1/social/auth/login`, userLogin);git
-            localStorage.setItem('accessToken', accessToken.accessToken);
+            console.log("success");
+            const data = await loginUser(`${API_BASE_URL}/api/v1/social/auth/login`, userLogin);
+            console.log(data);
+            localStorage.setItem('accessToken', data.accessToken);
 
             window.location.href = "../profile/index.html";
 
@@ -27,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(error);
         }
     });
-});
+
 
 async function loginUser(url, data) {
     try {
@@ -36,10 +38,7 @@ async function loginUser(url, data) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-             email: usernameInput.value,
-             password: passwordInput.value,
-             token: localStorage.getItem("token") || [], })
+            body: JSON.stringify(data)
 
         };
 
@@ -56,3 +55,6 @@ async function loginUser(url, data) {
         throw error;
     }
 }
+
+
+/* "eyJpZCI6MTA0NiwibmFtZSI6IktGbGtzZG5sdnMiLCJlbWFpbCI6ImRza2xzQHN0dWQubm9yb2ZmLm5vIiwiYXZhdGFyIjpudWxsLCJiYW5uZXIiOm51bGwsImlhdCI6MTY5NjQxMzAyOH0" */
