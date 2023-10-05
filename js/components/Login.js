@@ -21,9 +21,14 @@ const passwordInput = document.getElementById("password-input");
             console.log("success");
             const data = await loginUser(`${API_BASE_URL}/api/v1/social/auth/login`, userLogin);
             console.log(data);
+            console.log(data.name);
             localStorage.setItem('accessToken', data.accessToken);
 
-            window.location.href = "../profile/index.html";
+            localStorage.setItem('username', data.name);
+
+
+
+            /* window.location.href = "../profile/index.html"; */
 
         } catch (error) {
             console.error(error);
