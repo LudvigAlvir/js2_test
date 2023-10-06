@@ -40,15 +40,22 @@ async function getPosts() {
       "my-2",
       "d-flex",
       "justify-content-center",
-      "align-items-center"
+      "align-items-center",
+      "shadow",
+      "p-3",
+      "rounded"
     );
     postDiv.innerHTML += `
       <p class="fw-lighter">${newTime}</p>
       <img class="card-img-top object-fit-fill" src="${data[i].media}">
-      <div class="card-body">
+      <div class="card-body w-100">
         <h5 class="card-title">${data[i].title}</h5>
         <p class="card-text">${data[i].body}</p>
+        <hr>
         <div class="d-flex gap-2 my-2">
+          <p>Comments<p/>
+          <p>Reactions<p/> 
+        <hr>
           <button class="like btn btn-primary"><i class="fa-regular fa-heart"></i> Like</button>
           <button class="btn btn-primary"><i class="fa-regular fa-comment"></i> Comment</button>
           <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>
