@@ -38,14 +38,11 @@
 <div class="container d-flex flex-column min-vh-100">
     <div class="row">
          <div class="d-flex justify-content-between">
-        <button type="button" class="newpost  btn btn-success w-25 mx-5 my-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        Create New Post <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        <button type="button" class="newpost  btn btn-success w-25 mx-5 mt-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        New Post <i class="fa-solid fa-arrow-up-right-from-square"></i>
         </button>
-        <button class="sortbuttons btn btn-outline-success">Newest</button>
-        <button class="sortbuttons btn btn-outline-success">Popularity</button>
-        <button class="sortbuttons btn btn-outline-success">Trending</button>
-        <label class="searchlabel" for="search">Search posts:</label>
-        <input type="text" class="searchbar border-success form-control" id="search">
+        <input type="text" class="searchbar border-success form-control mt-2" placeholder="Search Posts" id="search">
+        <button id="searchbtn" type="button" class="btn rounded btn-success mx-2 mt-2">Go!</button>
       </div> 
 
   
@@ -64,7 +61,7 @@
                             
                         </div>
                         <div class="form-outline mb-4 d-flex flex-column">
-                            <label for="title" class="form-label">Body:
+                            <label for="body" class="form-label">Body:
                                 <textarea class="form-control" rows="5" cols="30" id="bodyinput">
                                 </textarea>
                             
@@ -95,7 +92,7 @@
   
   </div>
         </div>
-        <div class="row">
+        <div class="row row2">
        
         </div>
         
