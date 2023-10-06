@@ -25,6 +25,7 @@ async function registerUser(url, data) {
   } catch (error) {
     console.log(error);
   }
+  window.location.href = "../index.html";
 }
 
 form.addEventListener("submit", (e)=>{
@@ -36,7 +37,7 @@ form.addEventListener("submit", (e)=>{
         password: `${userPassword.value}` 
     }
     registerUser(`${API_BASE_URL}/api/v1/social/auth/register`, user);
-    window.location.href = "../index.html";
+    
 });
     
 

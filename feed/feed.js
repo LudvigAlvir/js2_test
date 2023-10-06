@@ -83,7 +83,7 @@ const titleInput = document.querySelector("#titleinput");
 const bodyInput = document.querySelector("#bodyinput");
 const tagsInput = document.querySelector("#tagsinput")
 const mediaInput = document.querySelector("#mediainput");
-const modal = document.querySelector("#static-backdrop");
+
 
 
 
