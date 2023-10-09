@@ -1,3 +1,4 @@
+import {calculateHours, calculateMinutesAgo} from "../js/components/Timefunctions.js";
 const url = "https://api.noroff.dev/api/v1/social/posts";
 const row = document.querySelector(".row2");
 var likeBtn = document.querySelectorAll('.like')
@@ -20,24 +21,24 @@ function createDiv(obj, newTime){
 );
 postDiv.innerHTML += `
   <p class="fw-lighter">${newTime}</p>
-  <img class="card-img-top object-fit-fill rounded" src="${obj.media}">
+  <a href="../specific/index.html?id=${obj.id}"><img class="card-img-top object-fit-fill rounded" src="${obj.media}"><a/>
   <div class="card-body w-100">
     <h5 class="card-title">${obj.title}</h5>
     <p class="card-text">${obj.body}</p>
     <hr>
     <div class="d-flex gap-2 my-2">
-      <p>Comments<p/>
-      <p>Reactions<p/> 
-    <hr>
+      <p>Comments: ${obj._count.comments}<p/>
+      <p>Reactions: ${obj._count.reactions} <p/> 
+      </div>
+      <br>
       <button class="like btn btn-primary"><i class="fa-regular fa-heart"></i> Like</button>
       <button class="btn btn-primary"><i class="fa-regular fa-comment"></i> Comment</button>
-      <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>
-    </div>`;
+      <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>`
 
 row.appendChild(postDiv);
 }
 
-async function getPosts(obj) {
+async function getPosts() {
 	const accessToken = localStorage.getItem("accessToken");
 	const res = await fetch(url, {
 		method: "GET",
@@ -74,26 +75,7 @@ async function getPosts(obj) {
 getPosts()
 
 
-function calculateMinutesAgo(timestampString) {
-  const postDate = new Date(timestampString);
-  const currentDate = new Date();
-  const timeDifferenceMillis = currentDate - postDate;
-  const minutesDifference = Math.floor(timeDifferenceMillis / (1000 * 60));
-  return minutesDifference;
-}
-function calculateHours(obj){
-  const oldTime = obj.created;
-  let newTime = Number(calculateMinutesAgo(oldTime));
-  
-  if(newTime > 60){
-   newTime = Math.round(newTime / 60) + " hours ago"
-  }else if(Math.round(newTime / 60) > 24) {
-    newTime = Math.round((newTime / 60) / 24) + " days ago";
-  } else if (newTime < 60){
-    newTime = newTime + " minutes ago"
-  }
-  return newTime
-}
+
 
 const postBtn = document.querySelector("#postbtn");
 const titleInput = document.querySelector("#titleinput");
@@ -176,10 +158,3 @@ function render(obj){
 
 };
 }
-
-
-
-
-
-
-
