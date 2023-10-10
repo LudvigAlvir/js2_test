@@ -68,7 +68,7 @@ function renderPost(obj){
 		comment.classList.add("d-flex");
 		comment.classList.add("my-4")
 		if(cmt.author.avatar){
-			comment.innerHTML = `<img src="${cmt.author.avatar}" class="profileimg d-block ui-w-40 rounded-circle" alt="">  <p class="w-25 d-inline-block text-muted mx-3 p-1">${cmt.author.name}:<p/> <input class="form-control" type="text" placeholder="${cmt.body}" disabled> <hr>`;
+			comment.innerHTML = `<img src="${cmt.author.avatar}" class="profileimg d-block ui-w-40 rounded-circle" alt="">  <p class="w-50 d-inline-block text-muted mx-3 p-1">${cmt.author.name}:<p/> <input class="form-control" type="text" placeholder="${cmt.body}" disabled> <hr>`;
 		} else {
 			console.log("hei");
 			comment.innerHTML = `<img src="./image/Anon.png" class="profileimg d-block ui-w-40 rounded-circle" alt="">  <p class="w-50 d-inline-block text-muted mx-3 p-1">${cmt.author.name}:<p/> <input class="form-control" type="text" placeholder="${cmt.body}" disabled> <hr>`;
@@ -109,3 +109,24 @@ btn2.addEventListener("click", () => {
 btn3.addEventListener("click", () => {
 	sendReact("👍");
 })
+const commentUrl = "https://api.noroff.dev/api/v1/social/posts/" + id + "/comment"
+async function sendComment (commentInfo){
+	const accessToken = localStorage.getItem("accessToken");
+	const res = await fetch (commentUrl, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${accessToken}`,
+		},
+		body: JSON.stringify(commentInfo),
+	})
+	const data = await res.json();
+	console.log(data)
+}
+const commentInput = document.querySelector("#commentinput");
+const commentBtn = document.querySelector(".commentbtn");
+
+commentBtn.addEventListener("click", () => {
+	const commentInfo = {body: commentInput.value, replyTold:0}
+	sendComment(commentInfo)
+});
