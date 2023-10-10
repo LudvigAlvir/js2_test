@@ -34,35 +34,8 @@ function renderPost(obj){
 	const commentDiv = document.createElement("div");
 	const commentList = document.createElement("ul");
 	const comments = document.querySelector(".comments");
-	const profileImg = document.querySelector(".profileimg");
-	const tagsList = document.querySelector(".tagsList");
-	obj.tags.forEach((elem) => {
-		const tag = document.createElement("li");
-		console.log(obj.tags)
-		if(obj.tags[0] === ""){
-			tag.innerHTML= `<input class="w-25" type="text" disabled placeholder="No Tags">`;
-			tagsList.appendChild(tag);
-		} else {
-			tag.innerHTML = `<input class="w-25" type="text" disabled placeholder="${elem}">`
-			tagsList.appendChild(tag);
-		}
-	});
-	
 	console.log(obj._count.comments)
-	if(obj.author.avatar){
-		console.log("Avatar exists")
-		profileImg.src = obj.author.avatar;
-
-	} else {
-		console.log("avatar does not exist")
-	}
 	comments.innerHTML = obj._count.comments
-	const showReactions = document.querySelector(".showreactions");
-	obj.reactions.forEach((react)=>{
-		showReactions.innerHTML += react.symbol + react.count
-	})
-	
-	
 	obj.comments.forEach((cmt)=>{
 		const comment = document.createElement("li");
 		comment.classList.add("d-flex");
