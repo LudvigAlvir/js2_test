@@ -9,7 +9,7 @@
     <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="../js/script.js" defer type="module"></script>
     <script src="https://kit.fontawesome.com/86fb0fb587.js" crossorigin="anonymous"></script>
-    <script src="../js/components/register.js" defer type="module"></script>
+    <script src="./js/register.js" defer type="module"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark-subtle">
@@ -20,17 +20,12 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="./profile/index.html">Profile</a></li>
-                    <li><a class="dropdown-item" href="./feed/index.html">Feed</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="./index.html">Quick Logout</a></li>
-                </ul>
+              <li class="nav-item">
+                 <a href="/profile" class="nav-link active">Profile</a>
               </li>
+              <li class="nav-item">
+                <a href="/feed/" class="nav-link active">Feed</a>
+             </li>
               
             </ul>
             <form class="d-flex" role="search">
@@ -41,7 +36,7 @@
         </div>
       </nav>
       <div class="container my-4 d-flex justify-content-center align-items-center border-1 min-vh-100">
-        <form action="./profile/" method="get" class="was-validated p-5" id="form">
+        <form method="get" class="was-validated p-5" id="form">
             <!-- Email input -->
             <div class="form-outline mb-4">
                 <label for="uname" class="form-label">Full Name</label>
@@ -97,7 +92,7 @@
             </div>
           
             <!-- Submit button -->
-            <a href="./profile"><button type="submit" id="submit" class="btn btn-primary btn-block mb-4">Register</button></a>
+            <button type="submit" id="submit" class="btn btn-primary btn-block mb-4">Register</button>
           
             <!-- Register buttons -->
            

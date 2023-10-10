@@ -37,6 +37,11 @@ form.addEventListener("submit", (e)=>{
         password: `${userPassword.value}` 
     }
     registerUser(`${API_BASE_URL}/api/v1/social/auth/register`, user);
+<<<<<<< HEAD
+=======
+    
+});
+>>>>>>> de0b86f212c0f84c1e4f82e92503357b20812d4d
     
 });
 
