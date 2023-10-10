@@ -1,20 +1,4 @@
-/* Error: expected "{".
- *     ,
- * 154 | >>>>>>> de0b86f212c0f84c1e4f82e92503357b20812d4d
- *     |                                                 ^
- *     '
- *   src/scss/main.scss 154:49  root stylesheet */
 
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: 'Error: expected "{".\a     \2577 \a 154 \2502  >>>>>>> de0b86f212c0f84c1e4f82e92503357b20812d4d\a     \2502                                                  ^\a     \2575 \a   src/scss/main.scss 154:49  root stylesheet';
-}
 
 code {
   font-size: 0.875em;
