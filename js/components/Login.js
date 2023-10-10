@@ -28,7 +28,7 @@ const passwordInput = document.getElementById("password-input");
 
 
 
-            /* window.location.href = "../profile/index.html"; */
+            window.location.href = "../profile/index.html";
 
         } catch (error) {
             console.error(error);
