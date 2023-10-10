@@ -12,7 +12,7 @@ if (regexTester(emailInput.value, email) === true){
 }else {
     invalid.style.display = "block";
     valid.style.display = "none";
-}*/
+}
 addEventListener("DOMContentLoaded", (event) => {
     const password = document.getElementById("password-input");
     const passwordAlert = document.getElementById("password-alert");

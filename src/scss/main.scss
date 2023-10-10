@@ -49,7 +49,6 @@
         display: none;
     }
 }
-<<<<<<< HEAD
 // Edit Profile follow button ----------------------------------------------
 
 .follow-container {
@@ -84,28 +83,24 @@
     width: 80%;
     max-width: 400px;
     position: relative;
-  }
-  
-  .close {
+}
+
+.close {
     position: absolute;
     right: 10px;
     top: 5px;
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-  }
+}
 
-  #saveBannerButton {
+#saveBannerButton {
     background-color: #007bff;
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     margin-top: 10px;
-  }
-=======
-body {
-    background:#eee;
 }
 .posts-content{
     margin-top:20px;    
@@ -151,4 +146,3 @@ body {
 .default-style .ui-bordered {
     border: 1px solid rgba(24,28,33,0.06);
 }
->>>>>>> de0b86f212c0f84c1e4f82e92503357b20812d4d
