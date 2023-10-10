@@ -11906,6 +11906,7 @@ textarea.form-control-lg {
     display: none;
   }
 }
+
 .modal {
   display: none;
   position: fixed;
@@ -11950,7 +11951,6 @@ textarea.form-control-lg {
   cursor: pointer;
   margin-top: 10px;
 }
-
 .posts-content {
   margin-top: 20px;
 }
