@@ -24,7 +24,8 @@ getPosts()
 
 function renderPost(obj){
 	const author = document.querySelector(".author");
-	author.innerHTML = `Posted by ${obj.author.name}`;
+	const newTime = calculateHours(obj)
+	author.innerHTML = `Posted by ${obj.author.name}, ${newTime}`;
 	const title = document.querySelector(".title");
 	title.innerHTML = obj.title;
 	const body = document.querySelector(".body");

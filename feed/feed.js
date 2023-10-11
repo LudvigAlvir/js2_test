@@ -30,10 +30,7 @@ postDiv.innerHTML += `
       <p>Comments: ${obj._count.comments}<p/>
       <p>Reactions: ${obj._count.reactions} <p/> 
       </div>
-      <br>
-      <button class="like btn btn-primary"><i class="fa-regular fa-heart"></i> Like</button>
-      <button class="btn btn-primary"><i class="fa-regular fa-comment"></i> Comment</button>
-      <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>`
+      `
 
 row.appendChild(postDiv);
 }
