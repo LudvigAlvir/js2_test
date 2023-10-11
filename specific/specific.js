@@ -122,6 +122,7 @@ async function sendComment (commentInfo){
 	})
 	const data = await res.json();
 	console.log(data)
+	location.reload()
 }
 const commentInput = document.querySelector("#commentinput");
 const commentBtn = document.querySelector(".commentbtn");
