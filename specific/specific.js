@@ -46,9 +46,9 @@ function renderPost(obj) {
   const profileImg = document.querySelector(".profileimg");
   const tagsList = document.querySelector(".tagsList");
   obj.tags.forEach((elem) => {
+	  console.log(obj.tags);
     const tag = document.createElement("li");
-    console.log(obj.tags);
-    if (obj.tags[0] === "") {
+    if (obj.tags[0] === "" || obj.tags === "[]") {
       tag.innerHTML = `<input class="w-25" type="text" disabled placeholder="No Tags">`;
       tagsList.appendChild(tag);
     } else {
