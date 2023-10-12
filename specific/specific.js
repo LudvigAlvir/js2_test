@@ -70,6 +70,7 @@ function renderPost(obj) {
     showReactions.innerHTML += react.symbol + react.count;
   });
 
+
   obj.comments.forEach((cmt) => {
     const comment = document.createElement("li");
     comment.classList.add("d-flex");
@@ -86,6 +87,7 @@ function renderPost(obj) {
   commentDiv.appendChild(commentList);
   const cardFooter = document.querySelector(".card-footer");
   cardFooter.appendChild(commentDiv);
+
 }
 const btn1 = document.querySelector(".react1");
 const btn2 = document.querySelector(".react2");
