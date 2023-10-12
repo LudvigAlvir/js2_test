@@ -246,4 +246,3 @@ function createProfilePostDiv(post, newTime, profilePostsContainer) {
 
 fetchUserProfile();
 
- 
