@@ -1,5 +1,5 @@
 import {calculateHours, calculateMinutesAgo} from "../js/components/Timefunctions.js";
-const url = "https://api.noroff.dev/api/v1/social/posts_reactions=true";
+const url = "https://api.noroff.dev/api/v1/social/posts?_reactions=true";
 const row = document.querySelector(".row2");
 var likeBtn = document.querySelectorAll('.like')
 const API_BASE_URL = 'https://api.noroff.dev';
@@ -58,7 +58,7 @@ async function getPosts(url) {
       createDiv(data[i],newTime)
   
     
-    var likeBtn = document.querySelectorAll('.like')
+    let likeBtn = document.querySelectorAll('.like')
     likeBtn.forEach(function(btn) {
   
       btn.addEventListener('click', function() {
@@ -116,16 +116,15 @@ postBtn.addEventListener("click", ()=>{
 const searchBtn = document.querySelector("#searchbtn");
 const searchInput = document.querySelector("#search");
 searchBtn.addEventListener("click", ()=> {
-  const searchparams = searchInput.value.toLowerCase().trim();
-  arr = searchparams.split(" ")
-  console.log(arr)
+  const searchparams = searchInput.value.trim();
     
-  getTitles(searchparams)
+  getTags(searchparams)
 });
-
-async function getTitles(searchparams) {
+async function getTags(searchparams) {
+  const tagsUrl = `https://api.noroff.dev/api/v1/social/posts?_tag=${searchparams}`
+  console.log(tagsUrl)
   const accessToken = localStorage.getItem("accessToken");
-  const res = await fetch(url, {
+  const res = await fetch(tagsUrl, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -133,26 +132,32 @@ async function getTitles(searchparams) {
     },
   });
   const data = await res.json();
+  console.log(data)
   row.innerHTML = ""
   data.forEach((obj)=> {
-    render(obj,searchparams)
-})
+    render(obj)
+  })
 function render(obj){
-  
-
-  const titlesArr = obj.title.toLowerCase().split(" ");
+ 
     
-  if (titlesArr.includes(searchparams) === true){
-    console.log(obj);
     const newTime = calculateHours(obj)
     createDiv(obj,newTime)
-
-    
-
-  }else {
-    console.log("didnt hit");
-  }
-
+    if(obj.media === ""){
+      
+    }
 };
 }
-const tagSearch = 
+const newest = document.querySelector("#newest");
+const oldest = document.querySelector("#oldest");
+
+newest.addEventListener("click", ()=>{
+  postDiv.innerHTML = "";
+  getPosts(url)
+
+});
+const oldestUrl = url + "&sortOrder=asc"
+oldest.addEventListener("click", ()=>{
+  postDiv.innerHTML="";
+  getPosts(oldestUrl);
+
+})
