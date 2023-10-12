@@ -1,9 +1,12 @@
+import {calculateHours, calculateMinutesAgo} from "../js/components/Timefunctions.js";
 const API_BASE_URL = "https://api.noroff.dev";
 const url = "https://api.noroff.dev/api/v1/social/profiles/";
 let accessToken;
 const displayedName = localStorage.getItem("username");
 accessToken = localStorage.getItem("accessToken");
 let newBannerImageUrl = "";
+const url2 = url + `${displayedName + "/posts"}`;
+
 
 async function fetchUserProfile() {
 
@@ -45,7 +48,6 @@ function updateProfile(userData) {
               </div>
               <div class="ms-3" style="margin-top: 130px">
                 <h5>${userData.name}</h5>
-                <p>${userData.location}</p>
               </div>
             </div>
             <div class="p-4 text-black" style="background-color: #f8f9fa">
@@ -77,6 +79,10 @@ function updateProfile(userData) {
     </div>
   </section>
 
+  <div id="profilePostsContainer" class="container d-flex flex-column min-vh-100">
+  
+  </div>
+
   <div id="editProfileModal" class="modal">
   <div class="modal-content">
     <span id="closeModal" class="close">&times;</span>
@@ -94,34 +100,50 @@ function updateProfile(userData) {
   document.body.appendChild(profileDiv);
 
 
-  editProfileButton.addEventListener("click", () => {
-    const editProfileModal = document.getElementById("editProfileModal");
-    editProfileModal.style.display = "block";
-  
-    const bannerImageInput = document.getElementById("bannerImageInput");
-    const saveBannerButton = document.getElementById("saveBannerButton");
-    const bannerImage = document.getElementById("bannerImage");
-  
-    saveBannerButton.addEventListener("click", () => {
-      const newBannerImageUrl = bannerImageInput.value;
-  
+/*   Edit Profile code  */
 
-      bannerImage.src = newBannerImageUrl;
+  const editProfileButton = document.getElementById("editProfileButton");
+  const editProfileModal = document.getElementById("editProfileModal");
+  const bannerImageInput = document.getElementById("bannerImageInput");
+  const saveBannerButton = document.getElementById("saveBannerButton");
+  const bannerImage = document.getElementById("bannerImage");
+  const closeModalButton = document.getElementById("closeModal");
   
-      editProfileModal.style.display = "none";
-    });
+  saveBannerButton.addEventListener("click", async () => {
+    const newBannerImageUrl = bannerImageInput.value;
   
-
-    const closeModalButton = document.getElementById("closeModal");
-    closeModalButton.addEventListener("click", () => {
-      editProfileModal.style.display = "none";
-    });
+    try {
+      const response = await fetch(`${API_BASE_URL}/social/profiles/${displayedName}/media`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ avatar: newBannerImageUrl }),
+      });
+  
+      if (response.ok) {
+        bannerImage.src = newBannerImageUrl;
+        editProfileModal.style.display = "none";
+      } else {
+        console.error("Failed to update banner image");
+      }
+    } catch (error) {
+      console.error("Error updating banner image:", error);
+    }
   });
   
+  editProfileButton.addEventListener("click", () => {
+    editProfileModal.style.display = "block";
+  });
   
-  
+  closeModalButton.addEventListener("click", () => {
+    editProfileModal.style.display = "none";
+  });
   
 
+
+    /* Follow button code  */
 
     const followButton = document.getElementById("followButton");
 
@@ -154,17 +176,74 @@ function updateProfile(userData) {
       console.error("Error following/unfollowing profile:", error);
     }
   });
+   fetchProfilePosts(displayedName); 
+}
+
+/* Profile page posts code */
+ async function fetchProfilePosts() {
+  const profilePostsContainer = document.getElementById("profilePostsContainer");
+
+  try {
+    const response = await fetch(url2, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch profile posts");
+    }
+
+    const profilePostsData = await response.json();
+
+    profilePostsData.forEach((post) => {
+      const newTime = calculateHours(post);
+      if (!post.media) {
+        return;
+      }
+      createProfilePostDiv(post, newTime, profilePostsContainer);
+    });
+  } catch (error) {
+    console.error("Error fetching and displaying profile posts:", error);
+  }
+}
+
+function createProfilePostDiv(post, newTime, profilePostsContainer) {
+  const postDiv = document.createElement("div");
+  postDiv.classList.add(
+  "col-lg-5",
+  "col-10",
+  "mx-auto",
+  "feedcard",
+  "my-2",
+  "d-flex",
+  "justify-content-center",
+  "align-items-center",
+  "shadow",
+  "p-3",
+  "rounded");
+
+  postDiv.innerHTML = `
+    <div>
+      <button id="editpost" class="btn btn-info">Edit post</button>
+      <button id="deletepost" class="btn btn-danger">Delete post</button>
+    </div>
+    <p class="fw-lighter">${newTime}</p>
+    <a href="../specific/index.html?id=${post.id}">
+      <img class="card-img-top object-fit-fill rounded" src="${post.media}" alt="${post.title}">
+    </a>
+    <div class="card-body w-100">
+      <h5 class="card-title">${post.title}</h5>
+      <p class="card-text">${post.body}</p>
+      <p class="card-text">Tags: ${post.tags.join(', ')}</p>
+    </div>
+  `;
+
+  profilePostsContainer.appendChild(postDiv);
 }
 
 fetchUserProfile();
 
-
-
-/* 
-Vise posts under brukeren 
-
-kunne redigere en post 
-
-kunne slette en post 
- */
 
