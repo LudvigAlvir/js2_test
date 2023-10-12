@@ -1,5 +1,5 @@
 import {calculateHours, calculateMinutesAgo} from "../js/components/Timefunctions.js";
-const url = "https://api.noroff.dev/api/v1/social/posts";
+const url = "https://api.noroff.dev/api/v1/social/posts_reactions=true";
 const row = document.querySelector(".row2");
 var likeBtn = document.querySelectorAll('.like')
 const API_BASE_URL = 'https://api.noroff.dev';
@@ -30,15 +30,12 @@ postDiv.innerHTML += `
       <p>Comments: ${obj._count.comments}<p/>
       <p>Reactions: ${obj._count.reactions} <p/> 
       </div>
-      <br>
-      <button class="like btn btn-primary"><i class="fa-regular fa-heart"></i> Like</button>
-      <button class="btn btn-primary"><i class="fa-regular fa-comment"></i> Comment</button>
-      <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>`
+      `
 
 row.appendChild(postDiv);
 }
 
-async function getPosts() {
+async function getPosts(url) {
 	const accessToken = localStorage.getItem("accessToken");
 	const res = await fetch(url, {
 		method: "GET",
@@ -72,7 +69,7 @@ async function getPosts() {
   }
   
 }
-getPosts()
+getPosts(url)
 
 
 
@@ -158,3 +155,4 @@ function render(obj){
 
 };
 }
+const tagSearch = 
