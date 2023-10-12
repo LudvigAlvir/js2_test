@@ -23,6 +23,9 @@ async function getPosts() {
 getPosts()
 
 function renderPost(obj){
+	const profileLink = document.querySelector(".profilelink");
+	profileLink.href = `../profilespecific/index.html?name=${obj.author.name}`
+
 	const author = document.querySelector(".author");
 	const newTime = calculateHours(obj)
 	author.innerHTML = `Posted by ${obj.author.name}, ${newTime}`;

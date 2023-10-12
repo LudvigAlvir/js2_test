@@ -1,5 +1,5 @@
 import {calculateHours, calculateMinutesAgo} from "../js/components/Timefunctions.js";
-const url = "https://api.noroff.dev/api/v1/social/posts";
+const url = "https://api.noroff.dev/api/v1/social/posts?_reactions=true";
 const row = document.querySelector(".row2");
 var likeBtn = document.querySelectorAll('.like')
 const API_BASE_URL = 'https://api.noroff.dev';
@@ -19,6 +19,12 @@ function createDiv(obj, newTime){
   "p-3",
   "rounded"
 );
+function reactions() {
+  obj.reactions.forEach((react)=>{
+    showReactions.innerHTML += react.symbol + react.count
+  })
+}
+
 postDiv.innerHTML += `
   <p class="fw-lighter">${newTime}</p>
   <a href="../specific/index.html?id=${obj.id}"><img class="card-img-top object-fit-fill rounded" src="${obj.media}"><a/>
@@ -28,7 +34,7 @@ postDiv.innerHTML += `
     <hr>
     <div class="d-flex gap-2 my-2">
       <p>Comments: ${obj._count.comments}<p/>
-      <p>Reactions: ${obj._count.reactions} <p/> 
+      <p>Reactions: ${obj.reactions} <p/> 
       </div>
       `
 
