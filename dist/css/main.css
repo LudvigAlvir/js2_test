@@ -12006,4 +12006,8 @@ textarea.form-control-lg {
   border: 1px solid rgba(24, 28, 33, 0.06);
 }
 
+.scale {
+  height: 100vh;
+}
+
 /*# sourceMappingURL=main.css.map */
