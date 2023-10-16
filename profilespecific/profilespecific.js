@@ -4,16 +4,44 @@ const url = "https://api.noroff.dev/api/v1/social/profiles/";
 
 
 const accessToken = localStorage.getItem("accessToken");
-let newBannerImageUrl = "";
-const container = document.querySelector(".container");
 const queryString = document.location.search;
 const params = new URLSearchParams(queryString);
 const id = params.get("name");
-const url2 = url + `${id + "/posts"}`;
-console.log(id);
+const url2 = url + `${id + "?_followers=true&_following=true&_posts=true"}`;
 
 
-async function fetchUserProfile() {
+
+
+async function fetchProfilePosts() {
+  
+    try {
+      const response = await fetch(url2, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to fetch profile posts");
+      }
+      
+      
+      const profilePostsData = await response.json();
+      console.log(profilePostsData)
+      updateProfile(profilePostsData)
+  
+      profilePostsData.posts.forEach((post) => {
+        const newTime = calculateHours(post);
+        createProfilePostDiv(post, newTime, profilePostsContainer);
+      });
+    } catch (error) {
+      console.error("Error fetching and displaying profile posts:", error);
+    }
+  }
+  fetchProfilePosts()
+/*async function fetchUserProfile() {
 
   try {
     const response = await fetch(url + id, {
@@ -29,15 +57,25 @@ async function fetchUserProfile() {
     }
 
     const userData = await response.json();
-	console.log(userData);
 
-    updateProfile(userData);
+    
   } catch (error) {
     console.error("Error fetching profile:", error);
   }
-}
+}*/
 
-function updateProfile(userData) {
+function updateProfile(profilePostsData) {
+    const obj = profilePostsData
+    let profileImg = "";
+    function displayImg(){ 
+    if(!obj.avatar){
+        profileImg = "../media/unknown_picture.jpg"
+    } else {
+        profileImg = obj.avatar
+    }
+    }
+    displayImg()
+    
   const profileDiv = document.createElement("div");
   profileDiv.innerHTML = `
   <section class="h-100 gradient-custom-2">
@@ -47,32 +85,30 @@ function updateProfile(userData) {
           <div class="card">
             <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height: 220px">
               <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px">
-                <img src="../media/unknown_picture.jpg" alt="unknown profile" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1" />
-                <button type="button" id="editProfileButton" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1">
-                  Edit profile
-                </button>
+                <img src="${profileImg}" alt="unknown profile" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1" />
+                
               </div>
               <div class="ms-3" style="margin-top: 130px">
-                <h5>${userData.name}</h5>
+                <h5>${obj.name}</h5>
               </div>
             </div>
             <div class="p-4 text-black" style="background-color: #f8f9fa">
               <div class="follow-container">
                 <button id="followButton" class="btn btn-primary">
-                  Follow
+                  Follow/Unfollow
                 </button>
               </div>
               <div class="d-flex justify-content-end text-center py-1">
                 <div>
-                  <p class="mb-1 h5">${userData._count.posts}</p>
+                  <p class="mb-1 h5">${obj._count.posts}</p>
                   <p class="small mb-0">Posts</p>
                 </div>
                 <div class="px-3">
-                  <p class="mb-1 h5">${userData._count.followers}</p>
+                  <p class="mb-1 h5">${obj._count.followers}</p>
                   <p class="small mb-0">Followers</p>
                 </div>
                 <div>
-                  <p class="mb-1 h5">${userData._count.following}</p>
+                  <p class="mb-1 h5">${obj._count.following}</p>
                   <p class="small mb-0">Following</p>
                 </div>
               </div>
@@ -113,84 +149,65 @@ function updateProfile(userData) {
     /* Follow button code  */
 
     const followButton = document.getElementById("followButton");
-
     followButton.addEventListener("click",  () => {
-    followPut(userData)
+    followPut(profilePostsData)
   });
-   fetchProfilePosts(id); 
 }
-async function followPut(userData){
+async function followPut(profilePostsData){
+    console.log(profilePostsData)
 	try {
-		const isFollowing = Array.isArray(userData.following) && userData.following.some(profile => profile.name === displayedName);
-		const unfollowUrl = `${API_BASE_URL}/v1//social/profiles/${userData.name}/unfollow`
-		const followUrl = `${API_BASE_URL}/v1/social/profiles/${userData.name}/follow`;
-		console.log(unfollowUrl, followUrl);
-		console.log(isFollowing)
-		function endpoint(){
-			if(isFollowing === true){
-				return unfollowUrl 
-
-			} else {
-				return followUrl
-			}
-		}
-  
+        const unfollowUrl = `${API_BASE_URL}/api/v1/social/profiles/${profilePostsData.name}/unfollow`
+		const followUrl = `${API_BASE_URL}/api/v1/social/profiles/${profilePostsData.name}/follow`;
+		const uname = localStorage.getItem("username");
+        const followers = profilePostsData.followers
+        const followerArr = []
+        const followContainer = document.querySelector(".follow-container");
+        console.log(followers);
+        followers.forEach((follower)=> {
+            followerArr.push(follower.name);
+        });
+        
+        
+        
+        function endpoint(){
+            console.log(followerArr)
+            if(followerArr.includes(uname)){ 
+                console.log("Uname exists in array, unfollowing."); 
+                followContainer.innerHTML += `<p>You just unfollowed this profile!<p/>`
+                  
+                return unfollowUrl
+            } else {
+                console.log("Uname does not exist in array, following.");
+                followContainer.innerHTML += `<p>You just followed this profile!<p/>`
+                return followUrl
+            }
+        }
+        
+         var myHeaders = new Headers();
+         myHeaders.append("Authorization", `Bearer ${accessToken}`);
+         
+         var requestOptions = {
+           method: 'PUT',
+           headers: myHeaders,
+           redirect: 'follow'
+         };
+         
+         fetch(endpoint(), requestOptions)
+           .then(response => response.text())
+           .then(result => console.log(result))
+           .catch(error => console.log('error', error));
       
-         console.log(endpoint())
-	  
-  
-      const response = await fetch (endpoint(), {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        }, body: "not empty", 
-		
-      });
-	  const resdata = await response.json()
-	  console.log(resdata);
-	  
-  
-      if (isFollowing) {
-        followButton.textContent = "Follow";
-      } else {
-        followButton.textContent = "Unfollow";
-      }
     } catch (error) {
       console.error("Error following/unfollowing profile:", error);
     }
+    
 }
 
 /* Profilespecific page posts code */
- async function fetchProfilePosts() {
-  const profilePostsContainer = document.getElementById("profilePostsContainer");
+ 
 
-  try {
-    const response = await fetch(url2, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch profile posts");
-    }
-
-    const profilePostsData = await response.json();
-
-    profilePostsData.forEach((post) => {
-      const newTime = calculateHours(post);
-      
-      createProfilePostDiv(post, newTime, profilePostsContainer);
-    });
-  } catch (error) {
-    console.error("Error fetching and displaying profile posts:", error);
-  }
-}
-
-function createProfilePostDiv(post, newTime, profilePostsContainer) {
+function createProfilePostDiv(post, newTime) {
+    const profilePostsContainer = document.getElementById("profilePostsContainer");
   const postDiv = document.createElement("div");
   postDiv.classList.add(
   "col-lg-5",
@@ -216,9 +233,10 @@ function createProfilePostDiv(post, newTime, profilePostsContainer) {
       <p class="card-text">Tags: ${post.tags.join(', ')}</p>
     </div>
   `;
-
   profilePostsContainer.appendChild(postDiv);
 }
 
-fetchUserProfile();
+
+
+
 

@@ -7,9 +7,8 @@ const API_BASE_URL = 'https://api.noroff.dev';
 
 
 
-  //const postDiv = document.createElement("div");
-const postDiv = document.createElement("div");
-function createDiv(obj, newTime){
+  const postDiv = document.createElement("div");
+  function createDiv(obj, newTime,reactionAmount){
   postDiv.classList.add(
   "col-lg-5",
   "col-10",

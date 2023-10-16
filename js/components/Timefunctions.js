@@ -11,7 +11,7 @@ export function calculateHours(obj){
   
   if(newTime > 60){
    newTime = Math.round(newTime / 60) + " hours ago"
-  }else if(Math.round(newTime / 60) > 24) {
+  }else if(newTime > 1440) {
     newTime = Math.round((newTime / 60) / 24) + " days ago";
   } else if (newTime < 60){
     newTime = newTime + " minutes ago"
