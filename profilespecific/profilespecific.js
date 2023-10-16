@@ -64,6 +64,7 @@ async function fetchProfilePosts() {
   }
 }*/
 
+
 function updateProfile(profilePostsData) {
     const obj = profilePostsData
     let profileImg = "";
@@ -207,6 +208,7 @@ async function followPut(profilePostsData){
  
 
 function createProfilePostDiv(post, newTime) {
+
     const profilePostsContainer = document.getElementById("profilePostsContainer");
   const postDiv = document.createElement("div");
   postDiv.classList.add(

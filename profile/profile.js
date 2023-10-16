@@ -39,6 +39,16 @@ async function fetchUserProfile() {
 /* Code for displaying profile card  */
 function updateProfile(userData) {
   const profileDiv = document.createElement("div");
+  const obj = userData
+  let profileImg = "";
+    function displayImg(){ 
+    if(!obj.avatar){
+        profileImg = "../media/unknown_picture.jpg"
+    } else {
+        profileImg = obj.avatar
+    }
+    }
+    displayImg()
   profileDiv.innerHTML = `
 
     <section class="h-100 gradient-custom-2">
@@ -48,7 +58,7 @@ function updateProfile(userData) {
             <div class="card">
               <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height: 220px">
                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px">
-                  <img src="${localStorageAvatar.avatar}" alt="" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1" />
+                  <img src="${profileImg}" alt="" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1" />
                   <button type="button" id="editProfileButton" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1">
                     Edit profile
                   </button>
@@ -58,11 +68,6 @@ function updateProfile(userData) {
                 </div>
               </div>
               <div class="p-4 text-black" style="background-color: #f8f9fa">
-                <div class="follow-container">
-                  <button id="followButton" class="btn btn-primary">
-                    Follow
-                  </button>
-                </div>
                 <div class="d-flex justify-content-end text-center py-1">
                   <div>
                     <p class="mb-1 h5">${userData._count.posts}</p>

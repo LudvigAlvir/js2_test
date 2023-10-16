@@ -7,8 +7,8 @@ const API_BASE_URL = 'https://api.noroff.dev';
 
 
 
+function createDiv(obj, newTime,reactionAmount){
   const postDiv = document.createElement("div");
-  function createDiv(obj, newTime,reactionAmount){
   postDiv.classList.add(
   "col-lg-5",
   "col-10",
@@ -32,6 +32,7 @@ postDiv.innerHTML += `
     <div class="d-flex gap-2 my-2">
       <p>Comments: ${obj._count.comments}<p/>
       <p>Reactions: ${reactionAmount} <p/> 
+      </div>
       </div>
       `
 
@@ -155,13 +156,14 @@ const newest = document.querySelector("#newest");
 const oldest = document.querySelector("#oldest");
 
 newest.addEventListener("click", ()=>{
-  postDiv.innerHTML = "";
+  row.innerHTML = "";
   getPosts(url)
 
 });
 const oldestUrl = url + "&sortOrder=asc"
+
 oldest.addEventListener("click", ()=>{
-  postDiv.innerHTML="";
+  row.innerHTML="";
   getPosts(oldestUrl);
 
 })
