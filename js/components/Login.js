@@ -26,6 +26,8 @@ const passwordInput = document.getElementById("password-input");
 
             localStorage.setItem('username', data.name);
 
+            localStorage.setItem("user", JSON.stringify(data))
+
 
 
             window.location.href = "../profile/index.html";
@@ -35,6 +37,17 @@ const passwordInput = document.getElementById("password-input");
         }
     });
 
+
+    //JSON docs for the loginUser function
+    /**
+     * 
+     * @async
+     * @function
+     * @param {string} url 
+     * @param {Object} data 
+     * @throws {Error} //If the fetch fails
+     * @returns {Promise<Object>}
+     */
 
 async function loginUser(url, data) {
     try {
@@ -61,5 +74,3 @@ async function loginUser(url, data) {
     }
 }
 
-
-/* "eyJpZCI6MTA0NiwibmFtZSI6IktGbGtzZG5sdnMiLCJlbWFpbCI6ImRza2xzQHN0dWQubm9yb2ZmLm5vIiwiYXZhdGFyIjpudWxsLCJiYW5uZXIiOm51bGwsImlhdCI6MTY5NjQxMzAyOH0" */

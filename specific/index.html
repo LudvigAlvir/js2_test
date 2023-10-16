@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="../dist/css/main.css" />
-    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    <script src="../dist/popper.min.js"></script>
     <link
       rel="stylesheet"
-      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+      href="../dist/css/bootstrap.min.css"
     />
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../dist/bootstrap.min.js"></script>
     <script src="./specific.js" type="module" defer></script>
     <script
       src="https://kit.fontawesome.com/86fb0fb587.js"
@@ -58,33 +58,48 @@
     </nav>
     <div class="container posts-content">
       <div class="row justify-content-center align-items-center">
-          <div class="col-lg-6">
+          <div class="scale w-auto">
               <div class="card mb-4">
                 <div class="card-body">
-                  <div class="media mb-3">
-                    <img src="./image/Anon.png" class="d-block ui-w-40 rounded-circle" alt="">
+                  <a class="profilelink"><div class="media mb-3">
+                    <img src="" class="profileimg d-block ui-w-40 rounded-circle" alt="">
+
                     <div class="author media-body ml-3">
                       Kenneth Frazier
                       <div class="text-muted small">3 days ago</div>
                     </div>
-                  </div>
+                  </div></a>
                   <h2 class="title"></h2>
                   <p class="body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus commodo bibendum. Vivamus laoreet blandit odio, vel finibus quam dictum ut.
+                    
                   </p>
-                  <a class="image ui-rect ui-bg-cover" style="background-image: url('https://bootdey.com/img/Content/avatar/avatar3.png');"></a>
+                  <ul class="tagsList"></ul>
+                  <a class="image ui-rect ui-bg-cover"></a>
                   
                 </div>
                 <div class="card-footer">
                   <p  class="d-inline-block text-muted">
-                      <strong>123</strong> <small class="align-middle">Likes</small>
+                      <strong class="showreactions"></strong> <small class="align-middle">Reactions</small>
                   </p>
                   <p  class="d-inline-block text-muted ml-3">
                       <strong class="comments"></strong> <small class="align-middle">Comments</small>
                   </p>
-                  <p class="d-inline-block text-muted ml-3">
-                    <small class="align-middle">Repost</small>
-                  </p>
+                  <button class="react1 btn btn-primary ms-5">
+                    🔥
+                  </button>
+                  <button class="react2 btn btn-primary">
+                    ❤️
+                  </button>
+                  <button class="react3 btn btn-primary">
+                    👍
+                  </button>
+                  
+                </div>
+                <div class="card-footer commentsection d-flex">
+                  <p class="d-inline-block text-muted ml-3 mt-2 mx-2">Write a comment:</p>
+                  <input type="text" placeholder="Your comment" id="commentinput" class="d-inline-block form-control w-75 ml-3">
+                  <button class="commentbtn btn btn-primary">Post</button>
+
                 </div>
               </div>
           </div>
