@@ -2,6 +2,7 @@ import { calculateHours, calculateMinutesAgo } from "../js/components/Timefuncti
 import editPost from "../js/components/Editpost.js";
 import deletePost from "../js/components/Delete.js";
 
+
 const API_BASE_URL = "https://api.noroff.dev";
 const url = "https://api.noroff.dev/api/v1/social/profiles/";
 let accessToken;
@@ -11,6 +12,7 @@ let newAvatarImageUrl = "";
 const url2 = url + `${displayedName + "/posts"}`;
 const editProfileUrl = url + `${displayedName}` +"/media"
 const localStorageAvatar = JSON.parse(localStorage.getItem("user"));
+
 
 async function fetchUserProfile() {
   try {
@@ -38,6 +40,7 @@ async function fetchUserProfile() {
 function updateProfile(userData) {
   const profileDiv = document.createElement("div");
   profileDiv.innerHTML = `
+
     <section class="h-100 gradient-custom-2">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -96,7 +99,9 @@ function updateProfile(userData) {
       </div>
     </div>
 
+
     <div id="editPostModal" class="modal">
+
   <div class="modal-content">
     <span id="closeEditPostButton" class="close">&times;</span>
     <h2>Edit Post</h2>
@@ -115,6 +120,7 @@ function updateProfile(userData) {
 
   document.body.appendChild(profileDiv);
 
+
   /* Edit Profile code */
   const editProfileButton = document.querySelector("#editProfileButton");
   const editProfileModal = document.querySelector("#editProfileModal");
@@ -127,6 +133,7 @@ function updateProfile(userData) {
   saveAvatarButton.addEventListener("click", async () => {
     const newAvatarImageUrl = avatarImageInput.value;
   
+
     try {
       console.log("Updating avatar with URL:", newAvatarImageUrl);
   
@@ -154,6 +161,7 @@ function updateProfile(userData) {
       console.error("Error updating avatar image:", error);
     }
   });
+
   
   editProfileButton.addEventListener("click", () => {
     editProfileModal.style.display = "block";
@@ -277,5 +285,6 @@ function createProfilePostDiv(post, newTime, profilePostsContainer) {
 }
 
 fetchUserProfile();
+
 
 

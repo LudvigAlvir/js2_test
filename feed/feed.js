@@ -1,11 +1,14 @@
 import {calculateHours, calculateMinutesAgo} from "../js/components/Timefunctions.js";
-const url = "https://api.noroff.dev/api/v1/social/posts";
+import countReactions from "../js/components/countReactions.js"
+const url = "https://api.noroff.dev/api/v1/social/posts?_reactions=true";
 const row = document.querySelector(".row2");
 var likeBtn = document.querySelectorAll('.like')
 const API_BASE_URL = 'https://api.noroff.dev';
 
-function createDiv(obj, newTime){
+
+
   const postDiv = document.createElement("div");
+  function createDiv(obj, newTime,reactionAmount){
   postDiv.classList.add(
   "col-lg-5",
   "col-10",
@@ -28,17 +31,14 @@ postDiv.innerHTML += `
     <hr>
     <div class="d-flex gap-2 my-2">
       <p>Comments: ${obj._count.comments}<p/>
-      <p>Reactions: ${obj._count.reactions} <p/> 
+      <p>Reactions: ${reactionAmount} <p/> 
       </div>
-      <br>
-      <button class="like btn btn-primary"><i class="fa-regular fa-heart"></i> Like</button>
-      <button class="btn btn-primary"><i class="fa-regular fa-comment"></i> Comment</button>
-      <button class="btn btn-primary"><i class="fa-solid fa-share"></i> Share</button>`
+      `
 
 row.appendChild(postDiv);
 }
 
-async function getPosts() {
+async function getPosts(url) {
 	const accessToken = localStorage.getItem("accessToken");
 	const res = await fetch(url, {
 		method: "GET",
@@ -55,13 +55,14 @@ async function getPosts() {
   for (let i = 0; i < data.length; i++) {
     
     const newTime = calculateHours(data[i])
+    const reactionAmount = countReactions(data[i])
     if(!data[i].media){
       continue
     } 
-      createDiv(data[i],newTime)
+      createDiv(data[i],newTime,reactionAmount)
   
     
-    var likeBtn = document.querySelectorAll('.like')
+    let likeBtn = document.querySelectorAll('.like')
     likeBtn.forEach(function(btn) {
   
       btn.addEventListener('click', function() {
@@ -72,7 +73,7 @@ async function getPosts() {
   }
   
 }
-getPosts()
+getPosts(url)
 
 
 
@@ -119,16 +120,15 @@ postBtn.addEventListener("click", ()=>{
 const searchBtn = document.querySelector("#searchbtn");
 const searchInput = document.querySelector("#search");
 searchBtn.addEventListener("click", ()=> {
-  const searchparams = searchInput.value.toLowerCase().trim();
-  arr = searchparams.split(" ")
-  console.log(arr)
+  const searchparams = searchInput.value.trim();
     
-  getTitles(searchparams)
+  getTags(searchparams)
 });
-
-async function getTitles(searchparams) {
+async function getTags(searchparams) {
+  const tagsUrl = `https://api.noroff.dev/api/v1/social/posts?_tag=${searchparams}`
+  console.log(tagsUrl)
   const accessToken = localStorage.getItem("accessToken");
-  const res = await fetch(url, {
+  const res = await fetch(tagsUrl, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -136,25 +136,34 @@ async function getTitles(searchparams) {
     },
   });
   const data = await res.json();
+  console.log(data)
   row.innerHTML = ""
   data.forEach((obj)=> {
-    render(obj,searchparams)
-})
+    render(obj)
+  })
 function render(obj){
-  
-
-  const titlesArr = obj.title.toLowerCase().split(" ");
+ 
     
-  if (titlesArr.includes(searchparams) === true){
-    console.log(obj);
     const newTime = calculateHours(obj)
     createDiv(obj,newTime)
-
-    
-
-  }else {
-    console.log("didnt hit");
-  }
-
+    if(obj.media === ""){
+      
+    }
 };
 }
+const newest = document.querySelector("#newest");
+const oldest = document.querySelector("#oldest");
+
+newest.addEventListener("click", ()=>{
+  postDiv.innerHTML = "";
+  getPosts(url)
+
+});
+const oldestUrl = url + "&sortOrder=asc"
+oldest.addEventListener("click", ()=>{
+  postDiv.innerHTML="";
+  getPosts(oldestUrl);
+
+})
+
+
