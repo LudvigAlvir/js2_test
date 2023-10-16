@@ -6,9 +6,10 @@ var likeBtn = document.querySelectorAll('.like')
 const API_BASE_URL = 'https://api.noroff.dev';
 
 
-function createDiv(obj, newTime, reactionAmount){
 
-  const postDiv = document.createElement("div");
+  //const postDiv = document.createElement("div");
+const postDiv = document.createElement("div");
+function createDiv(obj, newTime){
   postDiv.classList.add(
   "col-lg-5",
   "col-10",
