@@ -45,16 +45,10 @@ function renderPost(obj) {
   const comments = document.querySelector(".comments");
   const profileImg = document.querySelector(".profileimg");
   const tagsList = document.querySelector(".tagsList");
+  const tag = document.createElement("li");
+  tagsList.appendChild(tag);
   obj.tags.forEach((elem) => {
-	  console.log(obj.tags);
-    const tag = document.createElement("li");
-    if (obj.tags[0] === "" || obj.tags === "[]") {
-      tag.innerHTML = `<input class="w-25" type="text" disabled placeholder="No Tags">`;
-      tagsList.appendChild(tag);
-    } else {
-      tag.innerHTML = `<input class="w-25" type="text" disabled placeholder="${elem}">`;
-      tagsList.appendChild(tag);
-    }
+    tag.innerHTML += `<span class="tags">${elem}<span/>`
   });
 
   console.log(obj._count.comments);
@@ -92,7 +86,7 @@ function renderPost(obj) {
 const btn1 = document.querySelector(".react1");
 const btn2 = document.querySelector(".react2");
 const btn3 = document.querySelector(".react3");
-console.log(btn1.innerHTML, btn2.innerHTML, btn3.innerHTML);
+
 
 const reacturl = "https://api.noroff.dev/api/v1/social/posts/" + id + "/react/";
 async function sendReact(emoji) {
@@ -111,12 +105,15 @@ async function sendReact(emoji) {
 }
 btn1.addEventListener("click", () => {
   sendReact("🔥");
+  btn1.style.backgroundColor = "red" 
 });
 btn2.addEventListener("click", () => {
   sendReact("❤️");
+  btn2.style.backgroundColor = "red" 
 });
 btn3.addEventListener("click", () => {
   sendReact("👍");
+  btn3.style.backgroundColor = "red" 
 });
 const commentUrl =
   "https://api.noroff.dev/api/v1/social/posts/" + id + "/comment";
