@@ -24,7 +24,7 @@ const API_BASE_URL = 'https://api.noroff.dev';
 );
 postDiv.innerHTML += `
   <p class="fw-lighter">${newTime}</p>
-  <a href="../specific/index.html?id=${obj.id}"><img class="card-img-top object-fit-fill rounded" src="${obj.media}"><a/>
+  <a href="../specific/index.html?id=${obj.id}"><img class="card-img-top object-fit-fill rounded" src="${obj.media}" id="displayImg"><a/>
   <div class="card-body w-100">
     <h5 class="card-title">${obj.title}</h5>
     <p class="card-text">${obj.body}</p>
