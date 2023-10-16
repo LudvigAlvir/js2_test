@@ -1,10 +1,13 @@
 import {calculateHours, calculateMinutesAgo} from "../js/components/Timefunctions.js";
+import countReactions from "../js/components/countReactions.js"
 const url = "https://api.noroff.dev/api/v1/social/posts?_reactions=true";
 const row = document.querySelector(".row2");
 var likeBtn = document.querySelectorAll('.like')
 const API_BASE_URL = 'https://api.noroff.dev';
 
-function createDiv(obj, newTime){
+
+
+function createDiv(obj, newTime,reactionAmount){
   const postDiv = document.createElement("div");
   postDiv.classList.add(
   "col-lg-5",
@@ -21,14 +24,15 @@ function createDiv(obj, newTime){
 );
 postDiv.innerHTML += `
   <p class="fw-lighter">${newTime}</p>
-  <a href="../specific/index.html?id=${obj.id}"><img class="card-img-top object-fit-fill rounded" src="${obj.media}"><a/>
+  <a href="../specific/index.html?id=${obj.id}"><img class="card-img-top object-fit-fill rounded" src="${obj.media}" id="displayImg"><a/>
   <div class="card-body w-100">
     <h5 class="card-title">${obj.title}</h5>
     <p class="card-text">${obj.body}</p>
     <hr>
     <div class="d-flex gap-2 my-2">
       <p>Comments: ${obj._count.comments}<p/>
-      <p>Reactions: ${obj._count.reactions} <p/> 
+      <p>Reactions: ${reactionAmount} <p/> 
+      </div>
       </div>
       `
 
@@ -52,10 +56,11 @@ async function getPosts(url) {
   for (let i = 0; i < data.length; i++) {
     
     const newTime = calculateHours(data[i])
+    const reactionAmount = countReactions(data[i])
     if(!data[i].media){
       continue
     } 
-      createDiv(data[i],newTime)
+      createDiv(data[i],newTime,reactionAmount)
   
     
     let likeBtn = document.querySelectorAll('.like')
@@ -151,13 +156,16 @@ const newest = document.querySelector("#newest");
 const oldest = document.querySelector("#oldest");
 
 newest.addEventListener("click", ()=>{
-  postDiv.innerHTML = "";
+  row.innerHTML = "";
   getPosts(url)
 
 });
 const oldestUrl = url + "&sortOrder=asc"
+
 oldest.addEventListener("click", ()=>{
-  postDiv.innerHTML="";
+  row.innerHTML="";
   getPosts(oldestUrl);
 
 })
+
+

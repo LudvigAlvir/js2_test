@@ -149,3 +149,20 @@
     
 
 }
+.clicked {
+    transition: 1s;
+    background-color: red;
+}
+.unclicked {
+    transition: 1s;
+    background-color: blue;
+}
+.tags {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    padding: 5px;
+}
+.displaynone {
+    display: none;
+}

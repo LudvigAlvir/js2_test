@@ -11906,7 +11906,6 @@ textarea.form-control-lg {
     display: none;
   }
 }
-
 .modal {
   display: none;
   position: fixed;
@@ -11951,6 +11950,7 @@ textarea.form-control-lg {
   cursor: pointer;
   margin-top: 10px;
 }
+
 .posts-content {
   margin-top: 20px;
 }
@@ -12008,6 +12008,27 @@ textarea.form-control-lg {
 
 .scale {
   height: 100vh;
+}
+
+.clicked {
+  transition: 1s;
+  background-color: red;
+}
+
+.unclicked {
+  transition: 1s;
+  background-color: blue;
+}
+
+.tags {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.displaynone {
+  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */
