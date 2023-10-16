@@ -1,9 +1,13 @@
 import {calculateHours, calculateMinutesAgo} from "../js/components/Timefunctions.js";
+import countReactions from "../js/components/countReactions.js"
 const url = "https://api.noroff.dev/api/v1/social/posts?_reactions=true";
 const row = document.querySelector(".row2");
 var likeBtn = document.querySelectorAll('.like')
 const API_BASE_URL = 'https://api.noroff.dev';
 
+
+
+  //const postDiv = document.createElement("div");
 const postDiv = document.createElement("div");
 function createDiv(obj, newTime){
   postDiv.classList.add(
@@ -28,7 +32,7 @@ postDiv.innerHTML += `
     <hr>
     <div class="d-flex gap-2 my-2">
       <p>Comments: ${obj._count.comments}<p/>
-      <p>Reactions: ${obj._count.reactions} <p/> 
+      <p>Reactions: ${reactionAmount} <p/> 
       </div>
       `
 
@@ -52,10 +56,11 @@ async function getPosts(url) {
   for (let i = 0; i < data.length; i++) {
     
     const newTime = calculateHours(data[i])
+    const reactionAmount = countReactions(data[i])
     if(!data[i].media){
       continue
     } 
-      createDiv(data[i],newTime)
+      createDiv(data[i],newTime,reactionAmount)
   
     
     let likeBtn = document.querySelectorAll('.like')
@@ -161,3 +166,5 @@ oldest.addEventListener("click", ()=>{
   getPosts(oldestUrl);
 
 })
+
+
