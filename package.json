@@ -7,7 +7,9 @@
 		"build": "sass src/scss:dist/css",
 		"dev": "sass --watch src/scss:dist/css",
 		"lint": "eslint js/**/*.js",
-		"lint-fix": "eslint js/**/*.js --cache --fix"
+		"lint-fix": "eslint js/**/*.js --cache --fix",
+		"test": "npm run test-e2e",
+		"test-e2e": "cypress open"
 	},
 	"author": "",
 	"license": "ISC",
@@ -16,6 +18,10 @@
 		"sass": "^1.68.0"
 	},
 	"devDependencies": {
-		"eslint": "^8.52.0"
+		"cypress": "^13.4.0",
+		"eslint": "^8.52.0",
+		"eslint-plugin-cypress": "^2.15.1",
+		"eslint-plugin-jest": "^27.6.0",
+		"jest": "^29.7.0"
 	}
 }
