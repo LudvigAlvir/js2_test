@@ -1,16 +1,21 @@
 {
-  "name": "js2ca",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "sass src/scss:dist/css",
-    "dev": "sass --watch src/scss:dist/css"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bootstrap": "^5.3.2",
-    "sass": "^1.68.0"
-  }
+	"name": "js2ca",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "sass src/scss:dist/css",
+		"dev": "sass --watch src/scss:dist/css",
+		"lint": "eslint js/**/*.js",
+		"lint-fix": "eslint js/**/*.js --cache --fix"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"bootstrap": "^5.3.2",
+		"sass": "^1.68.0"
+	},
+	"devDependencies": {
+		"eslint": "^8.52.0"
+	}
 }
